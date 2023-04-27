@@ -25,6 +25,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
@@ -39,6 +40,7 @@
     <QtInstall>6</QtInstall>
     <QtModules>core;gui;multimedia;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
+    <QtPlugin>true</QtPlugin>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
@@ -58,6 +60,8 @@
     <IncludePath>.\src;$(IncludePath);.\include;.\forms;.\maps\**</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <IncludePath>.\src;$(IncludePath);.\include;.\forms;.\maps\**;C:\Qt\6.4.2\msvc2019_64\include\**;.\platforms</IncludePath>
+    <LibraryPath>C:\Qt\6.4.2\msvc2019_64\lib\**;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -93,6 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\R6Tools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="platforms\qwindows.dll" />
+    <None Include="platforms\qwindowsd.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

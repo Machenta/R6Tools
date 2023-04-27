@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1173</width>
-    <height>824</height>
+    <width>847</width>
+    <height>934</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QComboBox" name="map_combo">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>50</x>
       <y>40</y>
       <width>221</width>
       <height>31</height>
@@ -27,9 +27,9 @@
    <widget class="QLabel" name="map">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>50</x>
       <y>0</y>
-      <width>211</width>
+      <width>221</width>
       <height>31</height>
      </rect>
     </property>
@@ -49,7 +49,7 @@
    <widget class="QComboBox" name="site_combo">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>570</x>
       <y>40</y>
       <width>221</width>
       <height>31</height>
@@ -59,9 +59,9 @@
    <widget class="QLabel" name="site">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>570</x>
       <y>0</y>
-      <width>211</width>
+      <width>221</width>
       <height>31</height>
      </rect>
     </property>
@@ -81,27 +81,36 @@
    <widget class="QLabel" name="banLabel">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>80</y>
-      <width>681</width>
+      <width>801</width>
       <height>151</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="setupLabel">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>300</y>
-      <width>751</width>
-      <height>441</height>
+      <x>20</x>
+      <y>260</y>
+      <width>801</width>
+      <height>611</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
@@ -110,7 +119,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1173</width>
+     <width>847</width>
      <height>22</height>
     </rect>
    </property>

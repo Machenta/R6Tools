@@ -43,4 +43,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="platforms\qwindowsd.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="platforms\qwindows.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
