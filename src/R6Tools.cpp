@@ -1,10 +1,17 @@
 #include "R6Tools.h"
 #include <QComboBox>
 
+
 R6Tools::R6Tools(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
+
+    connect(ui.map_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(onFirstComboBoxIndexChanged(int)));
+    connect(ui.site_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(onSecondComboBoxIndexChanged(int)));
+    onFirstComboBoxIndexChanged(ui.map_combo->currentIndex());
+    onSecondComboBoxIndexChanged(ui.site_combo->currentIndex());
+
     mapList = { "Bank", "Border", "Chalet", "Clubhouse", "Coastline", "Consulate", "Favela", "Fortress", "Hereford Base", "House", "Kafe Dostoyevsky", "Kanal", "Oregon", "Outback", "Presidential Plane", "Skyscraper", "Theme Park", "Tower", "Villa", "Yacht" };
     BankSites = { "Archives/Tellers", "CEO Office/Staff Room", "Open Area/Kitchen", "Staff Room/CEO Office", "Tellers/Archives" };
     BorderSites = { "Armory/Archives", "Bathroom/Tellers", "Customs/Supply Room", "Ventilation/Workshop", "Workshop/Ventilation" };
@@ -14,14 +21,36 @@ R6Tools::R6Tools(QWidget *parent)
     ConsulateSites = { "Consul Office/Meeting Room", "Garage/Cafeteria", "Lobby/Press Room", "Meeting Room/Consul Office", "Press Room/Lobby" };
     FavelaSites = { "Aunt's Apartment/Armory Room", "Biker's Apartment/Grow Room", "Football Apartment/Workshop", "Packaging Room/Back Stairs", "Showers/Toilet" };
     FortressSites = { "Armory/Throne Room", "Bathroom/Bedroom", "Commanders Office/Dormitory", "Great Hall/Dining Room", "Throne Room/Armory" };
+    
+    siteOptions[0] = { "Archives/Tellers", "CEO Office/Staff Room", "Open Area/Kitchen", "Staff Room/CEO Office", "Tellers/Archives" };
+    siteOptions[1] = { "Armory/Archives", "Bathroom/Tellers", "Customs/Supply Room", "Ventilation/Workshop", "Workshop/Ventilation" };
+    siteOptions[2] = { "Bar/Gaming Room", "Dining Room/Kitchen", "Kitchen/Dining Room", "Library/Living Room", "Living Room/Library" };
+    
     siteList = { BankSites, BorderSites, ChaletSites, ClubhouseSites, CoastlineSites, ConsulateSites, FavelaSites };
         
     for (const QString& option : mapList) {
         ui.map_combo->addItem(option);
     }
 
+    mapsPath= "maps";
+    baseDir = QDir(mapsPath);
+    nameFilters << "*site.png" << "*bans.png";
+    QFileInfoList fileInfoList = baseDir.entryInfoList(nameFilters, QDir::Files);
 
 
+    for (const QString& mapName : mapList) {
+        baseDir.mkpath(mapName);
+    }
+
+
+    //QPixmap pixmap("maps/Bank/Villa.png");
+    //ui.banLabel->setPixmap(pixmap);
+    //ui.banLabel->setScaledContents(true);
+    //
+    //QPixmap pixmap2("maps/Bank/Villa.png");
+    //ui.setupLabel->setPixmap(pixmap2);
+    //ui.setupLabel->setScaledContents(true);
+    //loadMap("Villa");
 }
 
 
@@ -30,18 +59,70 @@ void R6Tools::onFirstComboBoxIndexChanged(int index)
     // Clear the second QComboBox
     ui.site_combo->clear();
 
+    imageNames.clear();
+    images.clear();
+
+    QString mapName = ui.map_combo->itemText(index);
+
+    qDebug() <<"Loading this map: " << mapName;
+    loadMap(mapName);
+
     // Add items to the second QComboBox based on the selected index in the first QComboBox
-    if (index == 0) {
-        QStringList options = { "Site 1-1", "Site 1-2", "Site 1-3" };
-        ui.site_combo->addItems(options);
-    }
-    else if (index == 1) {
-        QStringList options = { "Site 2-1", "Site 2-2", "Site 2-3" };
-        ui.site_combo->addItems(options);
-    }
-    // Add more conditions for other indices as needed
+    ui.site_combo->addItems(imageNames);
+
+
 }
 
+void R6Tools::loadMap(const QString& map)
+{
+    QDir mapDir(baseDir.filePath(map)); // Access the map folder inside the baseDir folder
+    QFileInfoList fileInfoList = mapDir.entryInfoList(nameFilters, QDir::Files);
+
+    for (const QFileInfo& fileInfo : fileInfoList) {
+
+
+        QString fileName = fileInfo.fileName();
+        if (fileName.contains("_site")) {
+            QString modifiedName = fileName.replace("_site.png", "");
+            imageNames.append(modifiedName);
+            QPixmap pixmap(fileInfo.filePath());
+            images.append(pixmap);
+		}
+
+
+        
+
+        // Check if the file name contains '_bans', and if so, set the pixmap to the banLabel
+        if (fileName.contains("_bans")) {
+            QPixmap pixmapBan(fileInfo.filePath());
+            ui.banLabel->setPixmap(pixmapBan.scaled(ui.banLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+    }
+
+    qDebug() << "Loaded " << imageNames.size() << " images";
+    qDebug() << "imageNames" << imageNames;
+}
+
+void R6Tools::onSecondComboBoxIndexChanged(int index)
+{
+    // Get the selected item from the second QComboBox (site_combo)
+    QString selectedImage = ui.site_combo->itemText(index);
+
+    qDebug() << "Selected site: " << selectedImage;
+
+    // Check if the selected image is not empty
+    if (!selectedImage.isEmpty()) {
+
+        // Find the index of the selected image in the imageNames list
+        int imageIndex = imageNames.indexOf(selectedImage);
+        qDebug() << "Image index: " << imageIndex;
+        // If the index is valid, set the corresponding pixmap to the setupLabel
+        if (imageIndex >= 0 && imageIndex < images.size()) {
+            QPixmap pixmap = images[imageIndex];
+            ui.setupLabel->setPixmap(pixmap.scaled(ui.setupLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+    }
+}
 
 
 R6Tools::~R6Tools()

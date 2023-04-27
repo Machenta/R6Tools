@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>1173</width>
+    <height>824</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,7 +49,7 @@
    <widget class="QComboBox" name="site_combo">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>240</x>
       <y>40</y>
       <width>221</width>
       <height>31</height>
@@ -59,7 +59,7 @@
    <widget class="QLabel" name="site">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>240</x>
       <y>0</y>
       <width>211</width>
       <height>31</height>
@@ -78,13 +78,39 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="banLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>681</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="setupLabel">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>300</y>
+      <width>751</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>1173</width>
      <height>22</height>
     </rect>
    </property>

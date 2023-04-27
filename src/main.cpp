@@ -1,5 +1,8 @@
 #include "R6Tools.h"
 #include <QtWidgets/QApplication>
+#include <QFile>
+
+
 
 int main(int argc, char *argv[])
 {
