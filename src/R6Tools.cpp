@@ -100,4 +100,6 @@ void R6Tools::onSecondComboBoxIndexChanged(int index)
 
 
 R6Tools::~R6Tools()
-{}
+{
+
+}
