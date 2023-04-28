@@ -12,10 +12,8 @@ R6Tools::R6Tools(QWidget *parent)
     onFirstComboBoxIndexChanged(ui.map_combo->currentIndex());
     onSecondComboBoxIndexChanged(ui.site_combo->currentIndex());
 
-    mapList = { "Bank", "Border", "Chalet", "Clubhouse", "Coastline", "Consulate", "Favela", "Fortress", "Hereford Base", "House", "Kafe Dostoyevsky", "Kanal", "Oregon", "Outback", "Presidential Plane", "Skyscraper", "Theme Park", "Tower", "Villa", "Yacht" };
+    mapList = { "Bank", "Border", "Chalet", "Clubhouse", "Coastline", "Consulate", "Favela", "Kafe Dostoyevsky", "Kanal", "Oregon", "Outback", "Skyscraper", "Theme Park", "Villa" };
 
-    siteList = { BankSites, BorderSites, ChaletSites, ClubhouseSites, CoastlineSites, ConsulateSites, FavelaSites };
-        
     for (const QString& option : mapList) {
         ui.map_combo->addItem(option);
     }
