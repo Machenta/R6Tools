@@ -1,4 +1,7 @@
 <RCC>
-    <qresource prefix="R6Tools">
-    </qresource>
+    <qresource prefix="/R6Tools"/>
+
+  <qresource prefix="/">
+    <file>Icon.png</file>
+  </qresource>
 </RCC>

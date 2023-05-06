@@ -12,7 +12,7 @@ R6Tools::R6Tools(QWidget *parent)
     onFirstComboBoxIndexChanged(ui.map_combo->currentIndex());
     onSecondComboBoxIndexChanged(ui.site_combo->currentIndex());
 
-    mapList = { "Bank", "Border", "Chalet", "Clubhouse", "Coastline", "Consulate", "Favela", "Kafe Dostoyevsky", "Kanal", "Oregon", "Outback", "Skyscraper", "Theme Park", "Villa" };
+    mapList = { "Bank", "Border", "Chalet", "Clubhouse", "Coastline", "Consulate", "Kafe Dostoyevsky", "Kanal", "Oregon", "Outback", "Skyscraper", "Theme Park", "Villa" , "Nighthaven Labs"};
 
     for (const QString& option : mapList) {
         ui.map_combo->addItem(option);

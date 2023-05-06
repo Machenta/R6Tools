@@ -102,6 +102,9 @@
     <None Include="platforms\qwindows.dll" />
     <None Include="platforms\qwindowsd.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Icon.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
